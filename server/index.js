@@ -11,10 +11,10 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// ✅ Use Render's port if available
+// ✅ Use Render's PORT environment variable
 const PORT = process.env.PORT || 3001;
 
-// Static files
+// Serve static files
 app.use("/uploads/images", express.static("uploads/images"));
 app.use("/uploads/recordings", express.static("uploads/recordings", {
   setHeaders: (res) => {
@@ -24,25 +24,26 @@ app.use("/uploads/recordings", express.static("uploads/recordings", {
 
 global.onlineUsers = new Map();
 
-// CORS config
+// CORS setup
 app.use(cors({
   origin: "https://zaptalk-tikz.onrender.com",
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
-  transports: ["websocket", "polling"]
+  transports: ["websocket", "polling"],
 }));
 
 app.use(express.json());
 
-// Routes
+// Health check route
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// API routes
 app.use("/api/auth", AuthrRoutes);
 app.use("/api/messages", MessageRoutes);
 
-// Socket.io config
+// WebSocket setup
 const io = new Server(server, {
   cors: {
     origin: "https://zaptalk-tikz.onrender.com",
@@ -73,3 +74,44 @@ io.on("connection", (socket) => {
       socket.to(sendUserSocket).emit("incoming-voice-call", { from, roomId, callType });
     }
   });
+
+  socket.on("outgoing-video-call", ({ from, to, roomId, callType }) => {
+    const sendUserSocket = onlineUsers.get(to);
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit("incoming-video-call", { from, roomId, callType });
+    }
+  });
+
+  socket.on("reject-video-call", ({ from }) => {
+    const sendUserSocket = onlineUsers.get(from);
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit("video-call-rejected");
+    }
+  });
+
+  socket.on("reject-voice-call", ({ from }) => {
+    const sendUserSocket = onlineUsers.get(from);
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit("voice-call-rejected");
+    }
+  });
+
+  socket.on("accept-incoming-call", ({ id }) => {
+    const sendUserSocket = onlineUsers.get(id);
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit("accept-call");
+    }
+  });
+
+  socket.on("signout", (userId) => {
+    onlineUsers.delete(userId);
+    socket.broadcast.emit("online-users", {
+      onlineUsers: Array.from(onlineUsers.keys()),
+    });
+  });
+});
+
+// ✅ Start server
+server.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
