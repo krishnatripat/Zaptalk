@@ -1,4 +1,4 @@
-export const HOST="http://localhost:3001";
+export const HOST="https://zaptalk-2.onrender.com";
 const AUTH_ROUTE=`${HOST}/api/auth`;
 const MESSAGES_ROUTE=`${HOST}/api/messages`;
 export const CHECK_USER_ROUTE = `${AUTH_ROUTE}/check-user`;
