@@ -7,7 +7,7 @@ import { getAuth } from "firebase/auth"
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyAmfWtB8Udq0_GAQ1R6xVBwmDUH5ALOruk",
-    authDomain: "Whatsapp-5bf1e.firebaseapp.com","https://zaptalk-tikz.onrender.com",
+    authDomain:"https://zaptalk-tikz.onrender.com",
     projectId: "Whatsapp-5bf1e",
     storageBucket: "Whatsapp-5bf1e.firebasestorage.app",
     messagingSenderId: "856779991490",
