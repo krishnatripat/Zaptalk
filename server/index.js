@@ -19,7 +19,7 @@ app.use("/uploads/recordings", express.static("uploads/recordings", {
 
 global.onlineUsers = new Map();
 app.use(cors({
-  origin: "http://localhost:3000", // ✅ Allow frontend to access backend
+  origin: "https://zaptalk-tikz.onrender.com", // ✅ Allow frontend to access backend
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
   transports: ["websocket", "polling"],
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 app.use("/api/auth", AuthrRoutes)
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://zaptalk-tikz.onrender.com",
     methods: ['GET', 'POST'],
   }
 });
