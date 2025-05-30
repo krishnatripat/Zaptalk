@@ -1,0 +1,31 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               String     @id @default(auto()) @map("_id") @db.ObjectId
+  email            String     @unique 
+  name             String
+  profilePicture   String     @default("")
+  about            String     @default("")
+
+  sentMessages     Messages[] @relation("UserSentMessages")
+  receivedMessages Messages[] @relation("UserReceivedMessages")
+}
+
+model Messages {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  sender        User     @relation("UserSentMessages", fields: [senderId], references: [id])
+  senderId      String   
+  receiver      User     @relation("UserReceivedMessages", fields: [receiverId], references: [id])
+  receiverId    String   
+  type          String   @default("text")
+  message       String
+  messageStatus String   @default("sent")
+  createdAt     DateTime @default(now())
+}
