@@ -1,22 +1,21 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"
+import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyAmfWtB8Udq0_GAQ1R6xVBwmDUH5ALOruk",
-    authDomain:"zaptalk-tikz.onrender.com",
-    projectId: "Whatsapp-5bf1e",
-    storageBucket: "Whatsapp-5bf1e.firebasestorage.app",
-    messagingSenderId: "856779991490",
-    appId: "1:856779991490:web:4b9adb28ec11c70c684e5b",
-    measurementId: "G-X0J04EL5QQ"
+  apiKey: "AIzaSyDXYy1qI5zeEU6FHTB-eJNvbnkZqEjcJQg",
+  authDomain: "whatsapp-clone-ea6a5.firebaseapp.com",
+  projectId: "whatsapp-clone-ea6a5",
+  storageBucket: "whatsapp-clone-ea6a5.firebasestorage.app",
+  messagingSenderId: "636901680689",
+  appId: "1:636901680689:web:19adc8e9ec75cf37f81710",
+  measurementId: "G-VS4EXQ3SJW"
 };
-
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const Auth = getAuth(app);
-export const firebaseAuth = getAuth(app);
+const analytics = getAnalytics(app);
