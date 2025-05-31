@@ -5,7 +5,7 @@ const nextConfig = {
     NEXT_PUBLIC_ZEGO_APP_ID:1690962753,
     NEXT_PUBLIC_ZEGO_SERVER_ID:"83fa38e967ede7cfe15fa117f1a07613"
   },
-  images:{domains:["localhost"]}
+  images:{domains:["https://zaptalk-2.onrender.com"]}
 };
 
 module.exports= nextConfig;
