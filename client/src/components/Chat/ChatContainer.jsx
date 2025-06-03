@@ -19,12 +19,12 @@ function ChatContainer() {
   }
 
   return (
-    <div className="h-[80vh] relative flex-grow overflow-auto custom-scrollbar">
-      <div className="bg-chat-background bg-fixed h-full w-full opacity-5 fixed left-0 top-0 z-index-0"></div>
+    <div className="h-[80vh] relative w-96 flex-grow overflow-auto custom-scrollbar">
+      <div className="bg-chat-background bg-fixed h-full w-96 opacity-5 fixed left-0 top-0 z-index-0"></div>
 
-      <div className="mx-10 my-10 relative bottom-0 z-40 left-0">
+      <div className="mx-10 my-10 relative w-96 bottom-0 z-40 left-0">
         <div className="flex w-full">
-          <div className="flex flex-col justify-end gap-1 w-full overflow-auto">
+          <div className="flex flex-col justify-end  gap-1 w-full overflow-auto">
             {Array.isArray(messages) &&
               messages.map((message, index) => (
                 message && (
