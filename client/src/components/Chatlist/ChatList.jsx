@@ -16,7 +16,7 @@ function ChatList() {
       setPageType("default")
     }
   }, [contactsPage])
-  return (<div className="bg-panel-header-background  flex flex-col max-h-screen z-10">
+  return (<div className="bg-panel-header-background w-96  flex flex-col max-h-screen z-10">
     {
       PageType === "default" &&
       (<>
